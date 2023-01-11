@@ -1,20 +1,23 @@
 import { useRef } from "react"
+import { InputContainer } from "./InputContainer"
 
 export const Input = ({ name, placeholder, stateHandler, styleName, type }) => {
 
   const inputReference = useRef();
   const changeHandler = () => {
-    setState(inputReference.current.value)
+    setState({...prev,[name]:inputReference.current.value})
   }
 
   return (
-    <input
-      className={styleName}
-      type={type}
-      name={name}
-      placeholder={placeholder}
-      onChange={changeHandler}
-      ref={inputReference}
-    />
+    <InputContainer>
+      <input
+        className={styleName}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        onChange={changeHandler}
+        ref={inputReference}
+      />
+    </InputContainer>
   )
 }
