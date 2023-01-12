@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
 export const InputContainer = styled.div`
-  display:fex
+  display:flex;
+  flex-direction:column;
 `;
