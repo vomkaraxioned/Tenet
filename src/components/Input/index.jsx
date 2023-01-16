@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { InputContainer } from "./InputContainer"
 
 export const Input = ({ name, index, inputValidator, isValid, placeholder, stateHandler, styleName, type, value, regEx, errMsg }) => {
@@ -7,9 +7,15 @@ export const Input = ({ name, index, inputValidator, isValid, placeholder, state
 
   const changeHandler = () => {
     stateHandler((inputData) => {
-      return { ...inputData, [name]: { element: inputReference.current,regEx:regEx, index: index } }
+      return { ...inputData, [name]: { element: inputReference.current, regEx: regEx, index: index,value:inputReference.current.value } }
     });
   }
+
+  useEffect(() => {
+    if (value) {
+      inputReference.current.value = value;
+    }
+  })
 
   return (
     <InputContainer>
@@ -20,11 +26,10 @@ export const Input = ({ name, index, inputValidator, isValid, placeholder, state
         placeholder={placeholder}
         onChange={changeHandler}
         onBlur={type !== "submit" ? () => inputValidator(inputReference.current, regEx, index) : null}
-        value={value}
         ref={inputReference}
       />
       {
-        !isValid[index] ?
+        !isValid?
           <span className="error">{errMsg}</span>
           : null
       }

@@ -9,21 +9,21 @@ const Login = () => {
       placeholder: "enter organization name",
       styleName: "login-page__org-name",
       type: "text",
-      errMsg:"please enter organization name"
+      errMsg: "please enter organization name"
     },
     {
       name: "userName",
       placeholder: "enter user name",
       styleName: "login-page__user-name",
       type: "text",
-      errMsg:"please enter user name"
+      errMsg: "please enter user name"
     },
     {
       name: "password",
       placeholder: "enter password",
       styleName: "login-page__password",
       type: "password",
-      errMsg:"please enter password"
+      errMsg: "please enter password"
     },
     {
       name: "btn-login",
