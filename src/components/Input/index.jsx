@@ -1,27 +1,14 @@
 import { useRef, useState } from "react"
 import { InputContainer } from "./InputContainer"
 
-export const Input = ({ name, placeholder, stateHandler, styleName, type, validityHandler, value, regEx, errMsg }) => {
-  const inputReference = useRef();
-  const [isValid, setIsValid] = useState(true);
+export const Input = ({ name, index, inputValidator, isValid, placeholder, stateHandler, styleName, type, value, regEx, errMsg }) => {
 
-  const inputValidator = () => {
-    const inputElement = inputReference.current;
-    const regPattern = new RegExp(regEx);
-    inputElement.value === "" ? setIsValid(false) : regEx && !regPattern.test(inputElement.value) ? setIsValid(false) : setIsValid(true);
-    isValid ? inputElement.classList.remove("err") : inputElement.classList.add("err");
-  }
+  const inputReference = useRef();
 
   const changeHandler = () => {
-    inputValidator();
-    if (isValid) {
-      stateHandler((inputData) => {
-        return { ...inputData, [name]: inputReference.current.value }
-      });
-      validityHandler(state=>[...state,true])
-    }else{
-      validityHandler(state=>[...state,false])
-    }
+    stateHandler((inputData) => {
+      return { ...inputData, [name]: { element: inputReference.current,regEx:regEx, index: index } }
+    });
   }
 
   return (
@@ -31,13 +18,13 @@ export const Input = ({ name, placeholder, stateHandler, styleName, type, validi
         type={type}
         name={name}
         placeholder={placeholder}
-        onInput={changeHandler}
-        onBlur={inputValidator}
+        onChange={changeHandler}
+        onBlur={type !== "submit" ? () => inputValidator(inputReference.current, regEx, index) : null}
         value={value}
         ref={inputReference}
       />
       {
-        !isValid ?
+        !isValid[index] ?
           <span className="error">{errMsg}</span>
           : null
       }
