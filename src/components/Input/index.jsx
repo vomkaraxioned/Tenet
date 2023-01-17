@@ -7,7 +7,7 @@ export const Input = ({ name, index, inputValidator, isValid, placeholder, state
 
   const changeHandler = () => {
     stateHandler((inputData) => {
-      return { ...inputData, [name]: { element: inputReference.current, regEx: regEx, index: index, value: inputReference.current.value } }
+      return { ...inputData, [name]: { regEx: regEx, index: index, input: inputReference.current.value } }
     });
   }
 
@@ -21,16 +21,16 @@ export const Input = ({ name, index, inputValidator, isValid, placeholder, state
   return (
     <InputContainer>
       <input
-        className={styleName}
+        className={isValid ? styleName : type !== "submit" ? styleName + " err" : styleName}
         type={type}
         name={name}
         placeholder={placeholder}
         onChange={changeHandler}
-        onBlur={type !== "submit" ? () => inputValidator(inputReference.current, regEx, index) : null}
+        onInput={type !== "submit" ? () => inputValidator(inputReference.current.value, regEx, index) : null}
         ref={inputReference}
       />
       {
-         !isValid?
+        !isValid ?
           <span className="error">{errMsg}</span>
           : null
       }

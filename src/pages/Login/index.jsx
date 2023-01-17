@@ -34,7 +34,7 @@ const Login = () => {
   ];
 
   const formDataHandler = (data) => {
-    console.log(data)
+
   }
 
   return (

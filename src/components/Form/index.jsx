@@ -3,50 +3,61 @@ import { Input } from "../Input/index"
 
 export const Form = ({ action, formDataHandler, method, name, styleName, inputs }) => {
 
-  const getArr = () => {
-    const arr = [],
+  const getObj = () => {
+    const obj = {},
       max = inputs.length - 1;
     let i = 0;
     for (i; i < max; i++) {
-      arr.push(true)
+      obj[i] = true
     }
-    return arr;
+    return obj;
   }
 
   const [inputData, setInputData] = useState({});
-  const [validities, setValidities] = useState(getArr());
+  const [validities, setValidities] = useState(getObj());
 
-  const inputValidator = (inputElement, regEx, index) => {
+  const inputValidator = (input, regEx, index) => {
     const regPattern = new RegExp(regEx);
-    inputElement.value === "" ? changeValidity(false, index) : regEx && !regPattern.test(inputElement.value) ? changeValidity(false, index) : changeValidity(true, index);
-    validities[index] ? inputElement.classList.remove("err") : inputElement.classList.add("err");
+    input === "" ? changeValidity(false, index) : regEx && !regPattern.test(input) ? changeValidity(false, index) : changeValidity(true, index);
   }
 
   const submitValidator = () => {
     const max = inputs.length - 1;
-    let i = 0;
+    let i = 0, valid = true;
     for (i; i < max; i++) {
       if (inputData[inputs[i].name] === undefined) {
         changeValidity(false, i);
+        valid = false
       } else {
-        const { element, regEx, index } = inputData[inputs[i].name];
-        inputValidator(element, regEx === undefined ? inputs[i].regEx : regEx, index)
+        const { input, regEx, index } = inputData[inputs[i].name];
+        inputValidator(input, regEx === undefined ? inputs[i].regEx : regEx, index);
+        if (!validities[i]) {
+          valid = false
+        }
       }
     }
-    const valid = validities.filter(item => !item)
-    return valid.length > 0 ? false : true;
+    return valid
   }
 
   const changeValidity = (value, index) => {
-    const temp = validities;
-    temp[index] = value;
-    setValidities(temp)
+    setValidities(obj => {
+      return { ...obj, [index]: value }
+    })
+  }
+
+  const dataFilter = () => {
+    const obj = {};
+    let x;
+    for (x in inputData) {
+      obj[x] = inputData[x].input;
+    }
+    return obj
   }
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (submitValidator()) {
-      formDataHandler(inputData)
+      formDataHandler(dataFilter())
       setInputData({});
       e.target.reset()
     }
@@ -67,7 +78,7 @@ export const Form = ({ action, formDataHandler, method, name, styleName, inputs 
               errMsg={errMsg}
               index={i}
               inputValidator={inputValidator}
-              isValid={validities}
+              isValid={validities[i]}
               name={name}
               placeholder={placeholder}
               stateHandler={setInputData}
