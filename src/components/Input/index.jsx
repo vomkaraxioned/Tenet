@@ -25,8 +25,10 @@ export const Input = ({ name, index, inputValidator, isValid, placeholder, state
         type={type}
         name={name}
         placeholder={placeholder}
-        onChange={changeHandler}
-        onInput={type !== "submit" ? () => inputValidator(inputReference.current.value, regEx, index) : null}
+        onInput={type !== "submit" ? () => {
+          changeHandler();
+          inputValidator(inputReference.current.value, regEx, index)
+        } : null}
         ref={inputReference}
       />
       {

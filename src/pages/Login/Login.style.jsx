@@ -16,7 +16,7 @@ export const LoginWrapper = styled.div`
       font-size:42px;
       font-weight:900;
       text-align:center;
-      text-shadow: 0px 7px 7px rgba(0,0,0,.6);
+      text-shadow: 0px 7px 7px rgba(0,0,0,.4);
     }
 
     &__form {
@@ -24,7 +24,7 @@ export const LoginWrapper = styled.div`
       padding:20px 5%;
       border-radius:5px;
       margin:0 auto;
-      background:rgba(0,0,0,.7);
+      background:rgba(0,0,0,.2);
       box-shadow: rgba(50, 50, 93, .25) 0px 50px 100px -20px, rgba(0, 0, 0, .3) 0px 30px 60px -30px, rgba(10, 37, 64, .35) 0px -2px 6px 0px inset;
 
       div {  margin-bottom:15px }
