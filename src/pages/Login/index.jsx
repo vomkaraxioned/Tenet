@@ -1,5 +1,6 @@
 import { Form } from "../../components/Form/index"
 import { LoginWrapper } from "./Login.style"
+import { apiHandler } from '../../api/apiHandler'
 
 const Login = () => {
 
@@ -34,7 +35,7 @@ const Login = () => {
   ];
 
   const formDataHandler = (data) => {
-
+    apiHandler('/login',data)
   }
 
   return (
