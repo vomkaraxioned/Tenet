@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
 export const LoginWrapper = styled.div`
-  width:60%;
+  width:100%;
   height:100vh;
   margin:0 auto;
   display:flex;
   align-items:center;
+  background:#03001C;
   flex-direction:column;
   justify-content:center;
+
 
   .login-page {
 
@@ -20,7 +22,7 @@ export const LoginWrapper = styled.div`
     }
 
     &__form {
-      width:30%;
+      width:20%;
       padding:20px 5%;
       border-radius:5px;
       margin:0 auto;
@@ -32,7 +34,7 @@ export const LoginWrapper = styled.div`
       input {
         width:96%;
         padding:10px 2%;
-        border:1px solid #000;
+        border:2px solid #5B8FB9;
         border-radius:4px;
 
         &[type=submit] {
@@ -59,7 +61,7 @@ export const LoginWrapper = styled.div`
         }
 
         &:focus {
-          border:1px solid #70F338;
+          border:2px solid #70F338;
           outline:none;
         }
 

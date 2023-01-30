@@ -48,6 +48,7 @@ const Login = () => {
         styleName="login-page__form"
         inputs={inputsObj}
       />
+
     </LoginWrapper>
   )
 }
