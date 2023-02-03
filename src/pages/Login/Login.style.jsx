@@ -69,6 +69,14 @@ export const LoginWrapper = styled.div`
 
         &.err { border:1px solid #f00 }
       }
+
+      @media only screen and (max-width: 768px) {
+        width:40%;
+      }
+
+      @media only screen and (max-width: 540px) {
+        width:60%;
+      }
     }
   }
 

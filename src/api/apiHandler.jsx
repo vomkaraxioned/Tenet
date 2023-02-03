@@ -1,5 +1,5 @@
-import { axiosFetcher } from "./axios"
+import { axiosFetcher } from "./axios";
 
-export const apiHandler = (url,data,resHandler)=>{
-  axiosFetcher.post(url,data).then(res=>console.log(res))
+export const apiHandler = async (url, data, resHandler) => {
+  await axiosFetcher.post(url, data).then(res => resHandler(res.data)).catch(err => alert(err.message))
 }

@@ -1,8 +1,15 @@
-import { Form } from "../../components/Form/index"
-import { LoginWrapper } from "./Login.style"
-import { apiHandler } from '../../api/apiHandler'
+import { useDispatch } from "react-redux";
+import { Form } from "../../components/Form/index";
+import { LoginWrapper } from "./Login.style";
+import { apiHandler } from "../../api/apiHandler";
+import { login } from "../../store/reducers/loginSlice";
 
 const Login = () => {
+
+  const dispatch =  useDispatch();
+  const resHandler = (data)=>{
+    dispatch(login(data))
+  }
 
   const inputsObj = [
     {
@@ -35,7 +42,7 @@ const Login = () => {
   ];
 
   const formDataHandler = (data) => {
-    apiHandler('/login',data)
+    apiHandler('/login',data,resHandler);
   }
 
   return (
