@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Form } from "../../components/Form/index";
+import { Form } from "../../components/Form";
 import { LoginWrapper } from "./Login.style";
 import { apiHandler } from "../../api/apiHandler";
 import { login } from "../../store/reducers/loginSlice";

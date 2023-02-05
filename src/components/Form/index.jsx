@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { Input } from "../Input/index"
+import { useState } from "react";
+import { Input } from "../Input";
 
 export const Form = ({ action, formDataHandler, method, name, styleName, inputs }) => {
 

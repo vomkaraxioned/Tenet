@@ -3,10 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const isLogin = ()=>{
   const loginDetails = localStorage.getItem("tenet");
   if(loginDetails) {
-    // window.location.href = "dashboard";
     return JSON.parse(loginDetails)
   }
-  return {}
+  
+  return false
 }
 
 const setStorage = (data)=>{
@@ -15,11 +15,11 @@ const setStorage = (data)=>{
 
 const loginSlice = createSlice({
   name:"loginSlice",
-  initialState:isLogin(),
+  initialState:{login:isLogin()},
   reducers:{
     login:(state,data)=>{
       setStorage(data.payload);
-      state = isLogin();
+      return { ...state, login: isLogin() }
     }
   }
 });

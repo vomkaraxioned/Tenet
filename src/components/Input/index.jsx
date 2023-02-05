@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from "react"
-import { InputContainer } from "./InputContainer"
+import { useRef, useEffect } from "react";
+import { InputContainer } from "./InputContainer";
 
 export const Input = ({ name, index, inputValidator, isValid, placeholder, stateHandler, styleName, type, value, regEx, errMsg }) => {
 
