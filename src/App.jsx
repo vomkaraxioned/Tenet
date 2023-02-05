@@ -6,7 +6,6 @@ import { Routing } from "./Routes";
 const App = ()=>{
 
   const isLogin = useSelector(state => state.loginReducer.login);
-  console.log(isLogin)
   const url = useLocation();
 
   const changePage = () => {
