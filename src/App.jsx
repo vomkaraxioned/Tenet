@@ -1,27 +1,41 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Routing } from "./Routes";
+import { apiHandler } from "./api/apiHandler";
+import { Navbar } from "./components/Navbar";
+import { logout } from "./store/reducers/loginSlice";
 
-const App = ()=>{
+const App = () => {
 
-  const isLogin = useSelector(state => state.loginReducer.login);
+  const userLogged = useSelector(state => state.loginReducer.login);
   const url = useLocation();
+  const dispatch = useDispatch();
 
   const changePage = () => {
-    if (isLogin && url.pathname === "/login") {
-      url.pathname = "/";
+    if (userLogged && url.pathname === "/login") {
+      window.location.href = "/";
     } else {
-      if (!isLogin && url.pathname !== "/login") {
-        url.pathname = "/login"
+      if (!userLogged && url.pathname !== "/login") {
+        window.location.href = "/login";
       }
     }
   }
 
-  useEffect(() => changePage(), [isLogin]);
+  useEffect(() => changePage(), [userLogged]);
 
-  return(
-    <Routing />
+  return (
+    <>
+      {userLogged ?
+        <Navbar
+          userName={userLogged.username}
+          orgName={userLogged.orgname}
+          logoutHandler={() => dispatch(logout())}
+        />
+        : null
+      }
+      <Routing />
+    </>
   )
 }
 

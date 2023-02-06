@@ -1,29 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const isLogin = ()=>{
+const isLogin = () => {
   const loginDetails = localStorage.getItem("tenet");
-  if(loginDetails) {
+  if (loginDetails) {
     return JSON.parse(loginDetails)
   }
-  
+
   return false
 }
 
-const setStorage = (data)=>{
-  localStorage.setItem("tenet",JSON.stringify(data));
+const setStorage = (data) => {
+  localStorage.setItem("tenet", JSON.stringify(data[0]));
 }
 
 const loginSlice = createSlice({
-  name:"loginSlice",
-  initialState:{login:isLogin()},
-  reducers:{
-    login:(state,data)=>{
+  name: "loginSlice",
+  initialState: { login: isLogin() },
+  reducers: {
+    login: (state, data) => {
       setStorage(data.payload);
       return { ...state, login: isLogin() }
+    },
+    logout: (state) => {
+      console.log("hello")
+      localStorage.removeItem("tenet");
+      return { ...state, login: false }
     }
   }
 });
 
-export const { login } = loginSlice.actions;
+export const { login, logout } = loginSlice.actions;
 
 export default loginSlice.reducer;
