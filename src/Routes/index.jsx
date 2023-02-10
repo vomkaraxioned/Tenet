@@ -9,7 +9,7 @@ export const Routing = () => {
     <Routes>
       <Route path="/" element={<Dashboard />} />
       <Route path="login" element={<Login />} />
-      <Route path="pagespeed" element={<PageSpeed />} />
+      <Route path="page-speed" element={<PageSpeed />} />
     </Routes>
   )
 }

@@ -48,7 +48,8 @@ const Login = () => {
   return (
     <LoginWrapper>
       <h1 className="login-page__title">Tenet Login</h1>
-      <Form action="#FIXME"
+      <Form 
+        action="#FIXME"
         formDataHandler={formDataHandler}
         method="Post"
         name="login-form"

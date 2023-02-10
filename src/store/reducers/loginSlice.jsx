@@ -22,7 +22,6 @@ const loginSlice = createSlice({
       return { ...state, login: isLogin() }
     },
     logout: (state) => {
-      console.log("hello")
       localStorage.removeItem("tenet");
       return { ...state, login: false }
     }
